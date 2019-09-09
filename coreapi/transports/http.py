@@ -343,11 +343,13 @@ class HTTPTransport(BaseTransport):
             session.auth = auth
         if not getattr(session.auth, 'allow_cookies', False):
             session.cookies.set_policy(BlockAll())
-
+        print('CHANGES OUT')
         if credentials is not None:
+            print('CHANGES IN1')
             if auth is not None:
                 warnings.warn("Ignoring 'credentials' argument in favor of 'auth'.")
             else:
+                print('CHANGES IN2')
                 warnings.warn(
                     "The 'credentials' argument is now deprecated in favor of 'auth'.",
                     DeprecationWarning
