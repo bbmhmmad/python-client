@@ -15,6 +15,8 @@ def domain_matches(request, domain):
         return True
 
     host = urlparse.urlparse(request.url).hostname
+    print('HOSTESS', host)
+    print('DOMAIN', domain)
     if domain.startswith('*'):
         return host.endswith(domain[1:])
     return host == domain

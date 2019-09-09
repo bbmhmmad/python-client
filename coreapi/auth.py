@@ -35,6 +35,7 @@ class TokenAuthentication(AuthBase):
             return request
 
         request.headers['Authorization'] = '%s %s' % (self.scheme, self.token)
+        print('REQUEST HEADERS', request.headers.get('Authorization', 1))
         return request
 
 
