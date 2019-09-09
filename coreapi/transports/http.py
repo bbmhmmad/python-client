@@ -350,6 +350,7 @@ class HTTPTransport(BaseTransport):
             print('CHANGES IN1', session.auth)
         if auth is not None:
             session.auth = auth
+            headers = {'Authorization': f'Bearer {auth.token}'}
             print('CHANGES IN2', session.auth)
         if not getattr(session.auth, 'allow_cookies', False):
             session.cookies.set_policy(BlockAll())
