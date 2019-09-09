@@ -339,23 +339,18 @@ class HTTPTransport(BaseTransport):
             headers = {key.lower(): value for key, value in headers.items()}
         if session is None:
             session = requests.Session()
+
+        if credentials is not None:
+            warnings.warn(
+                "The 'credentials' argument is now deprecated in favor of 'auth'.",
+                DeprecationWarning
+            )
+            session.auth = DomainCredentials(credentials)
         if auth is not None:
             session.auth = auth
         if not getattr(session.auth, 'allow_cookies', False):
             session.cookies.set_policy(BlockAll())
-        print('CHANGES OUT auth', auth)
-        print('CHANGES OUT creds', credentials)
-        if credentials is not None:
-            print('CHANGES IN1')
-            if auth is not None:
-                warnings.warn("Ignoring 'credentials' argument in favor of 'auth'.")
-            else:
-                print('CHANGES IN2')
-                warnings.warn(
-                    "The 'credentials' argument is now deprecated in favor of 'auth'.",
-                    DeprecationWarning
-                )
-                session.auth = DomainCredentials(credentials)
+
         if request_callback is not None or response_callback is not None:
             warnings.warn(
                 "The 'request_callback' and 'response_callback' arguments are now deprecated. "
