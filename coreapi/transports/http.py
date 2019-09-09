@@ -381,6 +381,7 @@ class HTTPTransport(BaseTransport):
         url = _get_url(link.url, params.path)
         headers = _get_headers(url, decoders)
         headers.update(self.headers)
+        print('REQHEADS', headers)
 
         request = _build_http_request(session, url, method, headers, encoding, params)
         settings = session.merge_environment_settings(request.url, None, None, None, None)
