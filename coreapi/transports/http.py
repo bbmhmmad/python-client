@@ -343,7 +343,8 @@ class HTTPTransport(BaseTransport):
             session.auth = auth
         if not getattr(session.auth, 'allow_cookies', False):
             session.cookies.set_policy(BlockAll())
-        print('CHANGES OUT')
+        print('CHANGES OUT auth', auth)
+        print('CHANGES OUT creds', credentials)
         if credentials is not None:
             print('CHANGES IN1')
             if auth is not None:
