@@ -343,7 +343,8 @@ class HTTPTransport(BaseTransport):
         if credentials is not None:
             warnings.warn(
                 "The 'credentials' argument is now deprecated in favor of 'auth'.",
-                DeprecationWarning
+                DeprecationWarning,
+                stacklevel=2
             )
             session.auth = DomainCredentials(credentials)
             print('CHANGES IN1', session.auth)
@@ -357,12 +358,14 @@ class HTTPTransport(BaseTransport):
             warnings.warn(
                 "The 'request_callback' and 'response_callback' arguments are now deprecated. "
                 "Use a custom 'session' instance instead.",
-                DeprecationWarning
+                DeprecationWarning,
+                stacklevel=2
             )
             session.mount('https://', CallbackAdapter(request_callback, response_callback))
             session.mount('http://', CallbackAdapter(request_callback, response_callback))
-
+        print('HEADERS1', self._headers)
         self._headers = itypes.Dict(headers or {})
+        print('HEADERS2', self._headers)
         self._session = session
 
     @property
