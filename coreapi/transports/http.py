@@ -339,15 +339,17 @@ class HTTPTransport(BaseTransport):
             headers = {key.lower(): value for key, value in headers.items()}
         if session is None:
             session = requests.Session()
-
+        print('CHANGES OUT', credentials)
         if credentials is not None:
             warnings.warn(
                 "The 'credentials' argument is now deprecated in favor of 'auth'.",
                 DeprecationWarning
             )
             session.auth = DomainCredentials(credentials)
+            print('CHANGES IN1', session.auth)
         if auth is not None:
             session.auth = auth
+            print('CHANGES IN2', session.auth)
         if not getattr(session.auth, 'allow_cookies', False):
             session.cookies.set_policy(BlockAll())
 
