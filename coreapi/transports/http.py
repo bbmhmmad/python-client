@@ -363,7 +363,7 @@ class HTTPTransport(BaseTransport):
             )
             session.mount('https://', CallbackAdapter(request_callback, response_callback))
             session.mount('http://', CallbackAdapter(request_callback, response_callback))
-        print('HEADERS1', self._headers)
+        print('HEADERS1', headers)
         self._headers = itypes.Dict(headers or {})
         print('HEADERS2', self._headers)
         self._session = session
